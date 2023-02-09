@@ -35,8 +35,8 @@ jobs:
       #     echo "NEXT_PUBLIC_KAKAO_MAP_APP_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_MAP_APP_KEY }}" >> .env
       #     cat .env
 
-      # - name: Run test code
-      #   run: yarn test
+      - name: Run test code
+        run: yarn test
 
       # - name: action-slack
       #   uses: 8398a7/action-slack@v3
