@@ -9,7 +9,9 @@
     "lint": "next lint",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "jest": "jest --watch"
+    "test": "jest",
+    "jest": "jest --watch",
+    "jest.coverage": "jest --watch --coverage"
   },
   "dependencies": {
     "@next/font": "13.1.6",
