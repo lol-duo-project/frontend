@@ -1,7 +1,5 @@
-import Style, { generateClassNames } from '@/utils/Style';
-
-// svg
-import SearchButton from '../../../public/svg/SearchButton.svg';
+import Style, { generateClassNames } from '../../utils/Style';
+import Image from 'next/image';
 
 interface Props {
   id?: string;
@@ -21,7 +19,7 @@ export function ChampionSearchBoard({ id }: Props) {
           <input className={CLASSNAMES.SearchInput} type="string" placeholder="가렌" id="search"></input>
 
           <button className={CLASSNAMES.searchButton} type="button">
-            <SearchButton />
+            <Image src={'/images/svg/SearchButton.svg'} width="14" height="15" alt="Search Button" />
           </button>
         </div>
 

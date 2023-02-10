@@ -1,4 +1,4 @@
-import Style, { generateClassNames } from '@/utils/Style';
+import Style, { generateClassNames } from '../../utils/Style';
 import { ReactNode } from 'react';
 
 interface Props {
@@ -8,25 +8,26 @@ interface Props {
 
 export function Modal({ id, children }: Props) {
   return (
-    // <Style css={css}>
-    // <div id={id} className={CLASSNAMES.modalContainer}>
-    <div id={id}>{children}</div>
-    // </Style>
+    <Style css={css}>
+      <div id={id} className={CLASSNAMES.modalContainer}>
+        {children}
+      </div>
+    </Style>
   );
 }
 
-// const CLASSNAMES = generateClassNames({
-//   modalContainer: 'modal-container',
-// });
+const CLASSNAMES = generateClassNames({
+  modalContainer: 'modal-container',
+});
 
-// const css = `
-// 	.${CLASSNAMES.modalContainer} {
-// 		position: absolute;
-// 		width: 1px;
-// 		height: 1px;
-// 		margin: -1px;
-// 		padding: 0px;
-// 		overflow: hidden;
-// 		border: 0;
-// 	}
-// `;
+const css = `
+	.${CLASSNAMES.modalContainer} {
+ 		position: absolute;
+ 		width: 1px;
+ 		height: 1px;
+ 		margin: -1px;
+ 		padding: 0px;
+ 		overflow: hidden;
+ 		border: 0;
+ 	}
+`;
