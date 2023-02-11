@@ -1,5 +1,8 @@
-name: Client_CD
+name: prod_deploy
 
+# production 실제 배포 환경 [master에서만 실행된다]
+# 마지막 테스트와 Github Runner를 이용해 Docker 이미지를 AWS로 넘기고
+# AWS에서 Image를 실행시킨다.
 on:
   push:
     branches: [main]
@@ -7,7 +10,7 @@ on:
 env:
   DOCKER_IMAGE: ghcr.io/lol-duo-project/frontend
   VERSION: ${{ github.sha }}
-  NAME: go_cicd
+  NAME: prod_deploy
 
 jobs:
   build:
@@ -17,15 +20,6 @@ jobs:
     steps:
       - name: Check out source code
         uses: actions/checkout@v2
-
-      # - name: Set env
-      #   run: |
-      #     touch .env
-      #     echo "NEXT_PUBLIC_KAKAO_MAP_APP_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_MAP_APP_KEY }}" >> .env
-      #     echo "KAKAO_CLIENT_SECRET=${{ secrets.KAKAO_CLIENT_SECRET}}" >> .env
-      #     echo "NEXT_PUBLIC_KAKAO_LOGIN=${{ secrets.NEXT_PUBLIC_KAKAO_LOGIN}}" >> .env
-      #     echo "NEXT_PUBLIC_SERVER_API_ENDPOINT=${{ secrets.NEXT_PUBLIC_SERVER_API_ENDPOINT}}" >> .env
-      #     cat .env
 
       - name: Set up docker buildx
         id: buildx
@@ -39,6 +33,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-
 
+      #github container registry 접속
       - name: Login to ghcr
         uses: docker/login-action@v1
         with:
