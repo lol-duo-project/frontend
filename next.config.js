@@ -6,6 +6,11 @@ const nextConfig = {
     // styledComponents: true,
     removeConsole: process.env.NODE_ENV === 'production',
   },
+  resolve: {
+    fallback: {
+      util: require.resolve("util/")
+    }
+  }
   // webpack: config => {
   //   config.module.rules.push({
   //     test: /\.svg$/,
