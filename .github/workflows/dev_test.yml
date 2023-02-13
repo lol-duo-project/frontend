@@ -1,0 +1,32 @@
+name: dev_test
+
+# 기능 안정성을 체크하기 위해
+# 개발 단계인 develop, feature 에서 테스트 코드 실행
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - feature/*
+
+jobs:
+  build:
+    name: Test for Development stage
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out source code
+        uses: actions/checkout@v2
+
+      - name: Install Node.js 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn
+        
+      - name: Run test code
+        run: yarn test
