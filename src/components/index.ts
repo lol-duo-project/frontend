@@ -1,2 +1,2 @@
-export * from './Modal';
+export * from './ChampionFoundation';
 export * from './ChampionSearchBoard';

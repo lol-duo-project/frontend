@@ -1,14 +1,15 @@
 import Style, { generateClassNames } from '../../utils/Style';
 import Image from 'next/image';
+import { ChampionFoundation } from '../ChampionFoundation';
 
 interface Props {
   id?: string;
 }
 
 export function ChampionSearchBoard({ id }: Props) {
-  const tempChampions = new Array<Object>(50).fill({
-    championName: 'Garen',
-    championThumbnail: undefined,
+  const tempChampions = new Array<{ name: string; url: string }>(5).fill({
+    name: '가렌',
+    url: 'https://lolduo-static-img.s3.ap-northeast-2.amazonaws.com/champion/Aatrox.svg',
   });
 
   return (
@@ -18,14 +19,14 @@ export function ChampionSearchBoard({ id }: Props) {
           <label htmlFor="search"></label>
           <input className={CLASSNAMES.SearchInput} type="string" placeholder="가렌" id="search"></input>
 
-          <button className={CLASSNAMES.searchButton} type="button">
+          <button className={CLASSNAMES.SearchButton} type="button">
             <Image src={'/images/svg/SearchButton.svg'} width="14" height="15" alt="Search Button" />
           </button>
         </div>
 
         <div className={CLASSNAMES.ChampionContainer}>
           {tempChampions.map((champ, index) => {
-            return <div key={index} className={CLASSNAMES.ChampionCard} />;
+            return <ChampionFoundation key={index} name={champ.name} url={champ.url} />;
           })}
         </div>
       </section>
@@ -37,9 +38,8 @@ const CLASSNAMES = generateClassNames({
   ChampionSearchBoard: 'champion-search-board',
   SearchContainer: 'search-container',
   ChampionContainer: 'champion-container',
-  ChampionCard: 'champion-card',
   SearchInput: 'search-input',
-  searchButton: 'search-button',
+  SearchButton: 'search-button',
 });
 
 const css = `
@@ -74,14 +74,6 @@ const css = `
     overflow-y: auto;
   }
 
-  .${CLASSNAMES.ChampionCard} {
-		width: 36px;
-    height: 36px;
-    background-color: lightcoral;
-    border: 1px solid white;
-    cursor: pointer;
-	}
-
   .${CLASSNAMES.SearchInput}{
     width: 100%;
     height: 100%;
@@ -94,7 +86,7 @@ const css = `
     outline: none;
   }
 
-  .${CLASSNAMES.searchButton}{
+  .${CLASSNAMES.SearchButton}{
     display: flex;
     justify-content: center;
     align-items: center;
