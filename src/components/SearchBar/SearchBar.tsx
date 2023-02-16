@@ -1,5 +1,5 @@
 import Style, { generateClassNames } from '../../utils/Style';
-import Image from 'next/image';
+import { ImageButton } from '../Button';
 
 interface Props {
   width: string;
@@ -23,9 +23,13 @@ export const SearchBar = (props: Props) => {
         <label htmlFor="search"></label>
         <input id="search" className={CLASSNAMES.SearchInput} placeholder={placeholder} {...rest}></input>
 
-        {/* <button className={CLASSNAMES.SearchButton} type="button">
-          <Image src={'/images/svg/SearchButton.svg'} width="14" height="15" alt="Search Button" />
-        </button> */}
+        <ImageButton
+          src={'/images/svg/SearchButton.svg'}
+          width={15}
+          height={16}
+          alt={'검색하기 버튼'}
+          buttonType={'button'}
+        />
       </div>
     </Style>
   );
@@ -34,7 +38,6 @@ export const SearchBar = (props: Props) => {
 const CLASSNAMES = generateClassNames({
   SearchContainer: 'search-container',
   SearchInput: 'search-input',
-  SearchButton: 'search-button',
 });
 
 const css = (props: Props) => `
@@ -54,21 +57,9 @@ const css = (props: Props) => `
     background-color: transparent;
     color: ${props.fontColor};
     border: none;
-    padding-right: 20px;
   }
 
   .${CLASSNAMES.SearchInput}:focus{
     outline: none;
-  }
-
-  .${CLASSNAMES.SearchButton}{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 100%;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
   }
 `;
