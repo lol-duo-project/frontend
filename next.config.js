@@ -1,4 +1,3 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   // reactStrictMode: true,
   swcMinify: true,
@@ -8,9 +7,9 @@ const nextConfig = {
   },
   resolve: {
     fallback: {
-      util: require.resolve("util/")
-    }
-  }
+      util: require.resolve('util/'),
+    },
+  },
   // webpack: config => {
   //   config.module.rules.push({
   //     test: /\.svg$/,
