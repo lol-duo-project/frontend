@@ -13,12 +13,8 @@ const customJestConfig = {
   testEnvironment: 'jest-environment-jsdom',
   testMatch: ['**/?(*.)+(spec|test).+(ts|tsx|js)'],
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1',
+    '^@src(.*)$': '<rootDir>/src$1',
   },
-  // transform: {
-  //   '^.+\\.tsx?$': 'ts-jest',
-  //   '^.+\\.svg$': '<rootDir>/svgTransform.js',
-  // },
 };
 
 export default createJestConfig(customJestConfig);
