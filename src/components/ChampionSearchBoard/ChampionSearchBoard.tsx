@@ -2,11 +2,7 @@ import Style, { generateClassNames } from '../../utils/Style';
 import { ChampionFoundation } from '../ChampionFoundation';
 import { SearchBar } from '../SearchBar';
 
-interface Props {
-  id?: string;
-}
-
-export function ChampionSearchBoard({ id }: Props) {
+export function ChampionSearchBoard() {
   const tempChampions = new Array<{ name: string; url: string }>(30).fill({
     name: 'Aatrox',
     url: 'https://lolduo-static-img.s3.ap-northeast-2.amazonaws.com/champion/Aatrox.svg',
@@ -14,12 +10,12 @@ export function ChampionSearchBoard({ id }: Props) {
 
   return (
     <Style css={css}>
-      <section id={id} className={CLASSNAMES.ChampionSearchBoard}>
+      <section className={CLASSNAMES.ChampionSearchBoard}>
         <SearchBar width="100%" height="33px" placeholder="챔피언 이름을 입력하세요." fontColor="White" />
 
         <div className={CLASSNAMES.ChampionContainer}>
           {tempChampions.map((champ, index) => {
-            return <ChampionFoundation key={index} name={champ.name} url={champ.url} />;
+            return <ChampionFoundation key={index} name={champ.name} url={champ.url} onClick={() => () => {}} />;
           })}
         </div>
       </section>
