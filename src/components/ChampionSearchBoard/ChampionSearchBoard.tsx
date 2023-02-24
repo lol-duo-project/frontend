@@ -1,31 +1,21 @@
 import Style, { generateClassNames } from '../../utils/Style';
-import Image from 'next/image';
+import { ChampionFoundation } from '../ChampionFoundation';
+import { SearchBar } from '../SearchBar';
 
-interface Props {
-  id?: string;
-}
-
-export function ChampionSearchBoard({ id }: Props) {
-  const tempChampions = new Array<Object>(50).fill({
-    championName: 'Garen',
-    championThumbnail: undefined,
+export function ChampionSearchBoard() {
+  const tempChampions = new Array<{ name: string; url: string }>(30).fill({
+    name: 'Aatrox',
+    url: 'https://lolduo-static-img.s3.ap-northeast-2.amazonaws.com/champion/Aatrox.svg',
   });
 
   return (
     <Style css={css}>
-      <section id={id} className={CLASSNAMES.ChampionSearchBoard}>
-        <div className={CLASSNAMES.SearchContainer}>
-          <label htmlFor="search"></label>
-          <input className={CLASSNAMES.SearchInput} type="string" placeholder="가렌" id="search"></input>
-
-          <button className={CLASSNAMES.searchButton} type="button">
-            <Image src={'/images/svg/SearchButton.svg'} width="14" height="15" alt="Search Button" />
-          </button>
-        </div>
+      <section className={CLASSNAMES.ChampionSearchBoard}>
+        <SearchBar width="100%" height="33px" placeholder="챔피언 이름을 입력하세요." fontColor="White" />
 
         <div className={CLASSNAMES.ChampionContainer}>
           {tempChampions.map((champ, index) => {
-            return <div key={index} className={CLASSNAMES.ChampionCard} />;
+            return <ChampionFoundation key={index} name={champ.name} url={champ.url} onClick={() => () => {}} />;
           })}
         </div>
       </section>
@@ -35,11 +25,7 @@ export function ChampionSearchBoard({ id }: Props) {
 
 const CLASSNAMES = generateClassNames({
   ChampionSearchBoard: 'champion-search-board',
-  SearchContainer: 'search-container',
   ChampionContainer: 'champion-container',
-  ChampionCard: 'champion-card',
-  SearchInput: 'search-input',
-  searchButton: 'search-button',
 });
 
 const css = `
@@ -53,16 +39,7 @@ const css = `
     border-radius: 16px;
 	}
   
-  .${CLASSNAMES.SearchContainer}{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    min-height: 33px;
-    border-bottom: 1px solid #B5B5B5;
-    margin-bottom: 10px;
-  }
-
+  
   .${CLASSNAMES.ChampionContainer}{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -72,36 +49,5 @@ const css = `
     place-items: center;
     overflow-x: hidden;
     overflow-y: auto;
-  }
-
-  .${CLASSNAMES.ChampionCard} {
-		width: 36px;
-    height: 36px;
-    background-color: lightcoral;
-    border: 1px solid white;
-    cursor: pointer;
-	}
-
-  .${CLASSNAMES.SearchInput}{
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-    color: white;
-    border: none;
-  }
-
-  .${CLASSNAMES.SearchInput}:focus{
-    outline: none;
-  }
-
-  .${CLASSNAMES.searchButton}{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 100%;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
   }
 `;
