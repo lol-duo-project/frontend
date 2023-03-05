@@ -1,9 +1,10 @@
-import '@/styles/globals.css';
+import '@src/styles/globals.css';
+import { customQueryClient } from '@src/utils/customQueryClient';
 import { QueryClient, QueryClientProvider, Hydrate } from '@tanstack/react-query';
-import { customQueryClient } from '@/utils/customQueryClient';
+import { appWithTranslation } from 'next-i18next';
 import type { AppProps } from 'next/app';
 
-export default function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   const queryClient: QueryClient = customQueryClient();
 
   return (
@@ -14,3 +15,5 @@ export default function App({ Component, pageProps }: AppProps) {
     </QueryClientProvider>
   );
 }
+
+export default appWithTranslation(App);

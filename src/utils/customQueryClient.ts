@@ -5,5 +5,12 @@ let queryClient: undefined | QueryClient = undefined;
 export const customQueryClient = () => {
   if (queryClient) return queryClient;
 
-  return new QueryClient();
+  return new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+        retry: 3,
+      },
+    },
+  });
 };
