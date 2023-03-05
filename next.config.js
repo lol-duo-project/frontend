@@ -11,7 +11,12 @@ const nextConfig = {
   },
   i18n,
   images: {
-    domains: ['lolduo-static-img.s3.ap-northeast-2.amazonaws.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'lolduo-static-img.s3.ap-northeast-2.amazonaws.com',
+      },
+    ],
   },
 };
 
