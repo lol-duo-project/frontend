@@ -1,4 +1,4 @@
-import React, { LegacyRef, RefObject } from 'react';
+import React, { ChangeEventHandler, ForwardedRef, LegacyRef, MutableRefObject } from 'react';
 import Style, { generateClassNames } from '../../utils/Style';
 import { ImageButton } from '../Button';
 
@@ -7,6 +7,7 @@ export interface Props {
   height: string;
   placeholder?: string;
   fontColor: string;
+  onChange: ChangeEventHandler<HTMLInputElement>;
 }
 
 export const SearchBar = React.forwardRef(
@@ -16,12 +17,13 @@ export const SearchBar = React.forwardRef(
       height = '33px',
       placeholder = '찾으시는 챔피언 이름을 입력해주세요.',
       fontColor = 'White',
+      onChange = () => {},
       ...rest
     }: Props,
-    ref: LegacyRef<HTMLInputElement>
+    ref: ForwardedRef<HTMLInputElement>
   ) => {
     return (
-      <Style css={css({ width, height, fontColor })}>
+      <Style css={css({ width, height, fontColor, onChange })}>
         <div className={CLASSNAMES.SearchContainer}>
           <label htmlFor="search"></label>
           <input
@@ -29,6 +31,7 @@ export const SearchBar = React.forwardRef(
             className={CLASSNAMES.SearchInput}
             placeholder={placeholder}
             ref={ref}
+            onChange={onChange}
             data-testid={'input'}
             {...rest}
           ></input>
@@ -57,7 +60,7 @@ const css = ({ width, height, fontColor }: Props) => `
     align-items: center;
     justify-content: space-between;
     width: ${width};
-    height: ${height};
+    min-height: ${height};
     border-bottom: 1px solid #B5B5B5;
     margin-bottom: 10px;
   }

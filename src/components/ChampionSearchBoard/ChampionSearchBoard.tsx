@@ -1,22 +1,82 @@
-import Style, { generateClassNames } from '../../utils/Style';
+import { useQuery } from '@tanstack/react-query';
+import { useRouter } from 'next/router';
+import { useMemo, useRef, useState } from 'react';
+
+// util
+import Style, { generateClassNames } from '@src/utils/Style';
+import { getChoseong } from '@src/utils/hangeul';
+
+// api
+import { getChampionList } from '@src/api/instance/championList';
+
+// component
 import { ChampionFoundation } from '../ChampionFoundation';
 import { SearchBar } from '../SearchBar';
 
+// interface
+import { Champion } from '@src/api/instance/championList/interface';
+
 export function ChampionSearchBoard() {
-  const tempChampions = new Array<{ name: string; url: string }>(30).fill({
-    name: 'Aatrox',
-    url: 'https://lolduo-static-img.s3.ap-northeast-2.amazonaws.com/champion/Aatrox.svg',
+  const { locale } = useRouter();
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [searchedChampList, setSearchedChampList] = useState<Champion[] | undefined>(undefined);
+
+  // fetch
+  const { data, status } = useQuery(['championList'], () => getChampionList({ size: 36, locale }), {
+    staleTime: Infinity,
+    cacheTime: Infinity,
   });
+
+  const championList: Champion[] = useMemo(() => {
+    setSearchedChampList(data?.data);
+    return data?.data;
+  }, [data]);
+
+  const getAutoCompleteResult = () => {
+    if (inputRef?.current) {
+      if (inputRef.current.value === '') {
+        setSearchedChampList(championList);
+        return;
+      }
+
+      const currentValue = inputRef.current.value.toLowerCase();
+      const filteredList = championList.filter(list => {
+        let result = false;
+
+        for (let i = 0; i < list?.name.length; i++) {
+          const champName = list?.name[i].toLowerCase();
+          const choseong = getChoseong(champName);
+
+          if (champName.includes(currentValue) || choseong.includes(currentValue)) {
+            result = true;
+            break;
+          }
+        }
+
+        return result;
+      });
+
+      setSearchedChampList(filteredList);
+    }
+  };
 
   return (
     <Style css={css}>
       <section className={CLASSNAMES.ChampionSearchBoard}>
-        <SearchBar width="100%" height="33px" placeholder="챔피언 이름을 입력하세요." fontColor="White" />
+        <SearchBar
+          width="100%"
+          height="33px"
+          placeholder="챔피언 이름을 입력하세요."
+          fontColor="White"
+          ref={inputRef}
+          onChange={getAutoCompleteResult}
+        />
 
         <div className={CLASSNAMES.ChampionContainer}>
-          {tempChampions.map((champ, index) => {
-            return <ChampionFoundation key={index} name={champ.name} url={champ.url} onClick={() => () => {}} />;
-          })}
+          {searchedChampList &&
+            searchedChampList.map(champ => {
+              return <ChampionFoundation key={champ.id} name={champ.id} url={champ.url} onClick={() => () => {}} />;
+            })}
         </div>
       </section>
     </Style>
