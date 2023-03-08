@@ -1,6 +1,6 @@
-import React, { ChangeEventHandler, ForwardedRef, LegacyRef, MutableRefObject } from 'react';
+import React, { ChangeEventHandler, ForwardedRef } from 'react';
 import Style, { generateClassNames } from '../../utils/Style';
-import { ImageButton } from '../Button';
+import { ImageButton } from '../Button/ImageButton';
 
 export interface Props {
   width: string;

@@ -1,7 +1,7 @@
 import Style, { generateClassNames } from '@src/utils/Style';
-import { ImageButton } from '../Button';
+import { ImageButton } from '../Button/ImageButton';
 
-const Header = () => {
+export const Header = () => {
   return (
     <Style css={css()}>
       <header className={CLASSNAMES.HeaderContainer}>
@@ -17,8 +17,6 @@ const Header = () => {
     </Style>
   );
 };
-
-export default Header;
 
 const CLASSNAMES = generateClassNames({
   HeaderContainer: 'header-container',

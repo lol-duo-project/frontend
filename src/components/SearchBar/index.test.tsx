@@ -1,9 +1,7 @@
-// Import the component and the useRef hook
 import { SearchBar } from './SearchBar';
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 
-// Test the component
 describe('SearchBar component', () => {
   const mockOnChange = jest.fn;
 
