@@ -1,5 +1,6 @@
 import Style, { generateClassNames } from '@src/utils/Style';
 import { ImageButton } from '../Button/ImageButton';
+import { TabBar } from '../TabBar';
 
 export const Header = () => {
   return (
@@ -13,6 +14,7 @@ export const Header = () => {
           alt={'LOL Duo Logo'}
           buttonType={'button'}
         />
+        <TabBar/>
       </header>
     </Style>
   );
