@@ -14,7 +14,7 @@ export const Header = () => {
           alt={'LOL Duo Logo'}
           buttonType={'button'}
         />
-        <TabBar/>
+        <TabBar />
       </header>
     </Style>
   );
@@ -28,7 +28,7 @@ const CLASSNAMES = generateClassNames({
 const css = () => `
   .${CLASSNAMES.HeaderContainer}{
     display: flex;
-    flex-direction: columns;
+    flex-direction: column;
     align-items: center;
     width: 100%;
     height: 104px;
@@ -42,6 +42,5 @@ const css = () => `
   .${CLASSNAMES.ImageButtonWrapper}{
     height: 56px;
     padding-left: 60px;
-
   }
 `;
