@@ -14,6 +14,7 @@
     "jest.coverage": "jest --watch --coverage"
   },
   "dependencies": {
+    "@emotion/babel-preset-css-prop": "^11.10.0",
     "@emotion/core": "^11.0.0",
     "@emotion/react": "^11.10.6",
     "@next/font": "13.1.6",
