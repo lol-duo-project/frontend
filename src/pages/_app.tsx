@@ -1,3 +1,4 @@
+import { Header } from '@src/components/Header';
 import '@src/styles/globals.css';
 import { customQueryClient } from '@src/utils/customQueryClient';
 import { QueryClient, QueryClientProvider, Hydrate } from '@tanstack/react-query';
@@ -10,6 +11,7 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
+        <Header />
         <Component {...pageProps} />
       </Hydrate>
     </QueryClientProvider>
