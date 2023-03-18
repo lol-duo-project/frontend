@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { useMemo, useRef, useState } from 'react';
+import { css } from '@emotion/react';
 
 // util
-import Style, { generateClassNames } from '@src/utils/Style';
 import { getChoseong } from '@src/utils/hangeul';
 
 // api
@@ -61,53 +61,43 @@ export function ChampionSearchBoard() {
   };
 
   return (
-    <Style css={css}>
-      <section className={CLASSNAMES.ChampionSearchBoard}>
-        <SearchBar
-          width="100%"
-          height="33px"
-          placeholder="챔피언 이름을 입력하세요."
-          fontColor="White"
-          ref={inputRef}
-          onChange={getAutoCompleteResult}
-        />
+    <section css={championSearchBoard}>
+      <SearchBar
+        width="100%"
+        height="33px"
+        placeholder="챔피언 이름을 입력하세요."
+        fontColor="White"
+        ref={inputRef}
+        onChange={getAutoCompleteResult}
+      />
 
-        <div className={CLASSNAMES.ChampionContainer}>
-          {searchedChampList &&
-            searchedChampList.map(champ => {
-              return <ChampionFoundation key={champ.id} name={champ.id} url={champ.url} onClick={() => () => {}} />;
-            })}
-        </div>
-      </section>
-    </Style>
+      <div css={championContainer}>
+        {searchedChampList &&
+          searchedChampList.map(champ => {
+            return <ChampionFoundation key={champ.id} name={champ.id} url={champ.url} onClick={() => () => {}} />;
+          })}
+      </div>
+    </section>
   );
 }
 
-const CLASSNAMES = generateClassNames({
-  ChampionSearchBoard: 'champion-search-board',
-  ChampionContainer: 'champion-container',
-});
+const championSearchBoard = css`
+  display: flex;
+  flex-direction: column;
+  width: 244px;
+  height: 253px;
+  padding: 16px;
+  background-color: #2f2f2f;
+  border-radius: 16px;
+`;
 
-const css = `
-	.${CLASSNAMES.ChampionSearchBoard} {
-    display: flex;
-    flex-direction: column;
-		width: 244px;
-    height: 253px;
-    padding: 16px;
-    background-color: #2F2F2F;
-    border-radius: 16px;
-	}
-  
-  
-  .${CLASSNAMES.ChampionContainer}{
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    gap: 4px;
-    width: 100%;
-    place-items: center;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
+const championContainer = css`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 4px;
+  width: 100%;
+  place-items: center;
+  overflow-x: hidden;
+  overflow-y: auto;
 `;

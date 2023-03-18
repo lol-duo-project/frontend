@@ -1,10 +1,10 @@
 import { MouseEventHandler } from 'react';
 import Image from 'next/image';
-import Style, { generateClassNames } from '@src/utils/Style';
+import { css, SerializedStyles } from '@emotion/react';
 
 interface Props {
   src: string;
-  buttonClass?: string;
+  buttonClass?: SerializedStyles;
   width: number;
   height: number;
   alt: string;
@@ -12,36 +12,26 @@ interface Props {
   onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
-export const ImageButton = (props: Props) => {
-  const { src, buttonClass, width, height, alt, buttonType, onClick, ...rest } = props;
-
+export const ImageButton = ({ src, buttonClass, width, height, alt, buttonType, onClick, ...rest }: Props) => {
   return (
-    <Style css={css()}>
-      <button
-        className={`${CLASSNAMES.SearchButton} ${buttonClass ? buttonClass : ''}`}
-        type={buttonType}
-        onClick={onClick ? onClick : () => {}}
-        {...rest}
-      >
-        <Image src={src} width={width} height={height} alt={alt} />
-      </button>
-    </Style>
+    <button
+      css={[imageButtonContainer, buttonClass]}
+      type={buttonType}
+      onClick={onClick ? onClick : () => {}}
+      {...rest}
+    >
+      <Image src={src} width={width} height={height} alt={alt} />
+    </button>
   );
 };
 
-const CLASSNAMES = generateClassNames({
-  SearchButton: 'search-button',
-});
-
-const css = () => `
-  .${CLASSNAMES.SearchButton}{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-  }
+const imageButtonContainer = css`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 `;
