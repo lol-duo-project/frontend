@@ -1,10 +1,16 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { TextButton } from '.';
 
+const useRouter = jest.spyOn(require('next/router'), 'useRouter');
+
 describe('TextButton', () => {
   const mockClickFn = jest.fn().mockImplementation(() => {
     return 'click';
   });
+
+  useRouter.mockImplementation(() => ({
+    pathname: '/duo',
+  }));
 
   it('정상적인 props을 통해 렌더링이 정상적으로 된다', () => {
     const { container } = render(
