@@ -8,6 +8,10 @@ const nextConfig = {
   swcMinify: true,
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
+    emotion: {
+      autoLabel: 'dev-only',
+      labelFormat: '[dirname]__[filename]__[local]__',
+    },
   },
   i18n,
   images: {
