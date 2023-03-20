@@ -1,9 +1,11 @@
 import { css } from '@emotion/react';
+import { card, gray200, regular20 } from '@src/styles';
+import { flexCenter } from '@src/styles/display';
 import { useRouter } from 'next/router';
 import { TextButton } from '../Button';
 
 export const TabBar = () => {
-  const { pathname, query, push } = useRouter();
+  const { pathname, push } = useRouter();
 
   const handleChangeToType = (type: 'duo' | 'solo') => {
     push({ pathname: type });
@@ -15,15 +17,19 @@ export const TabBar = () => {
         clickEnableWidth={70}
         clickEnableHeight={48}
         isActive={pathname === '/duo'}
-        fontColor="#676767"
+        displaySet={flexCenter}
+        fontSize={regular20}
+        fontColor={gray200}
         text={'Duo'}
         onClick={() => handleChangeToType('duo')}
       />
       <TextButton
         clickEnableWidth={70}
         clickEnableHeight={48}
+        displaySet={flexCenter}
         isActive={pathname === '/solo'}
-        fontColor="#676767"
+        fontSize={regular20}
+        fontColor={gray200}
         text={'Solo'}
         onClick={() => handleChangeToType('solo')}
       />
@@ -38,4 +44,5 @@ const tabContainer = css`
   width: 100%;
   height: 48px;
   padding-left: 60px;
+  background-color: ${card};
 `;

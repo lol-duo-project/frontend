@@ -1,4 +1,5 @@
 import { Header } from '@src/components/Header';
+import { Footer } from '@src/components/Footer/Footer';
 import '@src/styles/globals.css';
 import { customQueryClient } from '@src/utils/customQueryClient';
 import { QueryClient, QueryClientProvider, Hydrate } from '@tanstack/react-query';
@@ -13,6 +14,7 @@ function App({ Component, pageProps }: AppProps) {
       <Hydrate state={pageProps.dehydratedState}>
         <Header />
         <Component {...pageProps} />
+        <Footer />
       </Hydrate>
     </QueryClientProvider>
   );
