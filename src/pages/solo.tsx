@@ -1,10 +1,10 @@
-import { ChampionSearchBoard } from '@src/components';
+import { PositionChampSearchBoard } from '@src/components';
 
 const solo = () => {
   return (
-    <>
-      <ChampionSearchBoard />
-    </>
+    <div>
+      <PositionChampSearchBoard />
+    </div>
   );
 };
 
