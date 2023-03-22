@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import { ImageButton } from '../Button';
 
@@ -12,30 +12,29 @@ export enum Lane {
 }
 
 interface PositionSearchBoardProps {
+  selectedLane: Lane;
   onSelect: (lane: Lane) => void;
 }
 
-export function PositionSearchBoard({ onSelect }: PositionSearchBoardProps) {
-  const [selectedLane, setSelectedLane] = useState<Lane | null>(Lane.All);
+export function PositionSearchBoard({ selectedLane, onSelect }: PositionSearchBoardProps) {
 
   const handleLaneSelect = (lane: Lane) => {
-    setSelectedLane(lane);
     onSelect(lane);
-  };
-
-  const buttonStyle = (lane: Lane) => {
-    const baseButtonStyle = [laneButton];
-    if (selectedLane === lane) {
-      baseButtonStyle.push(activeLaneButton);
-    }
-    return baseButtonStyle;
   };
   
   return (
     <div css={laneSearchBar}>
       {
         Object.values(Lane).map((lane) => (
-          <ImageButton key={lane} src={`/images/svg/Position${lane}.svg`} buttonClass={css(buttonStyle(lane))} width={24} height={24} alt={`${lane}`} buttonType={'button'} onClick={() => handleLaneSelect(lane)} />
+          <ImageButton key={lane} 
+            src={`/images/svg/Position${lane}.svg`}
+            buttonClass={selectedLane === lane ? activeLaneButton : laneButton} 
+            width={24} 
+            height={24} 
+            alt={`${lane}`} 
+            buttonType={'button'} 
+            onClick={() => handleLaneSelect(lane)} 
+          />
         ))
       }
     </div>
@@ -61,15 +60,22 @@ const laneButton = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #3F3F3F;
   border: 1px solid #555555;
   border-radius: 100%;
   cursor: pointer;
+  background: #3F3F3F;
   &:hover {
     background: rgba(200, 170, 110, 0.2);
   }
 `;
 
 const activeLaneButton = css`
+  width: 44px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #555555;
+  border-radius: 100%;
   background: rgba(200, 170, 110, 0.2);
 `;
