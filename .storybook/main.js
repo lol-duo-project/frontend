@@ -12,13 +12,16 @@ module.exports = {
   core: {
     builder: '@storybook/builder-webpack5',
   },
+  babel: async options => ({
+    ...options,
+    presets: [...options.presets, '@emotion/babel-preset-css-prop'],
+  }),
   webpackFinal: async (config, { configType }) => {
     config.resolve.alias = {
       ...config.resolve.alias,
       '@src': path.resolve(__dirname, '../src'),
       '@pulic': path.resolve(__dirname, '../public/images'),
     };
-
     return config;
   },
 };
