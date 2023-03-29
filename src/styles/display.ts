@@ -9,7 +9,7 @@ export const flexRowCenter = `
   justify-content: center;
 `;
 
-export const flexColumnCenter = `
+export const flexAlignCenter = `
   display: flex;
   align-items: center;
 `;

@@ -1,4 +1,4 @@
-import { PositionChampSearchBoard } from '@src/components';
+import { PositionChampSearchBoard } from "@src/components/organisms/PositionChampSearchBoard";
 
 const solo = () => {
   return (
