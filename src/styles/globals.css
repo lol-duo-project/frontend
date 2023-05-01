@@ -11,10 +11,6 @@ body {
   overflow-x: hidden;
 }
 
-html {
-  margin-top: 104px;
-}
-
 a {
   color: inherit;
   text-decoration: none;

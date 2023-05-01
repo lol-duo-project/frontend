@@ -1,10 +1,11 @@
-import { Header } from '@src/components/Header';
-import { Footer } from '@src/components/Footer/Footer';
+import { Header } from '@src/components/organisms/Header';
+import { Footer } from '@src/components/organisms/Footer/Footer';
 import '@src/styles/globals.css';
 import { customQueryClient } from '@src/utils/customQueryClient';
 import { QueryClient, QueryClientProvider, Hydrate } from '@tanstack/react-query';
 import { appWithTranslation } from 'next-i18next';
 import type { AppProps } from 'next/app';
+import { Background } from '@src/components/atoms/Background/Background';
 
 function App({ Component, pageProps }: AppProps) {
   const queryClient: QueryClient = customQueryClient();
@@ -13,7 +14,9 @@ function App({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <Header />
-        <Component {...pageProps} />
+        <Background>
+          <Component {...pageProps} />
+        </Background>
         <Footer />
       </Hydrate>
     </QueryClientProvider>
