@@ -16,3 +16,7 @@ export const TitleGuide = '#38289C / 75';
 export const yetGuide = '#9C2883 / 75';
 export const VisibleGuide = '#444247 / 40';
 export const BgGuide = '#F9F9FC';
+
+export const firstChart = '#466CD2';
+export const secondChart = '#D2466B';
+export const thridChart = '#5646D2';
